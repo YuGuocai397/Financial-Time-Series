@@ -1,0 +1,28 @@
+---
+title: "Probit"
+author: "Yu"
+date: "2019年11月26日"
+output: html_document
+---
+
+```{r}
+library(haven)
+MROZ <- read_dta("E:/Yu/Economictrics/Data/Stata datasets W5e/MROZ.DTA")
+head(MROZ)
+```
+```{r}
+plot(inlf~educ,data=MROZ)
+plot(inlf~kidslt6,data=MROZ)
+table(MROZ$inlf)
+prop.table(table(MROZ$inlf))
+library(MASS)
+
+inlf0<- as.factor(MROZ$inlf)
+#fitpinlf<-polr(inlf0~kidslt6,data=MROZ)
+fitpinlf<-lm(inlf~kidslt6,data=MROZ)
+summary(fitpinlf)
+fitpinlf1<-lm(inlf~kidslt6+educ+exper+age+kidsge6,data=MROZ)
+summary(fitpinlf1)
+
+```
+
